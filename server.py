@@ -1,3 +1,6 @@
+""" This project uses the Emotion Predict function of the IBM Watson NLP Library
+    for a text emotion detection.
+"""
 from flask import Flask, request, render_template
 from EmotionDetection.emotion_detection import emotion_detector
 
@@ -5,6 +8,7 @@ app = Flask("Emotion Detector")
 
 @app.route("/emotionDetector")
 def get_emotion_detection():
+    """ Function to run an emotion detection using the appropriate Web API """
     text_to_analyze = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyze)
     if response['dominant_emotion'] == "None":
@@ -20,6 +24,7 @@ def get_emotion_detection():
 
 @app.route("/")
 def render_index_page():
+    """ Function to render the Web App main page """
     return render_template('index.html')
 
 if __name__ == "__main__":
